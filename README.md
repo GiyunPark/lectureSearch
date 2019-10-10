@@ -12,7 +12,7 @@
 <summary>미팅 1회차</summary>
 <h2>프로젝트 미팅 1회차</h2>
 장소 : 커피빈 (서울 강남구 테헤란로1길 29), 강남역 11번 출구 인근<br>
-시간 :2019.09.18  오후 7시<br>
+시간 : 2019.09.18  오후 7시<br>
 작성자 : <a href='https://github.com/GiyunPark'>박기윤</a><br>
 <br>
 <h2>회의 내용</h2>
@@ -103,7 +103,7 @@ JDK1.8.202(SE 8)(2019년 1월 15일) 버전 이하 사용시 무료
 
 <details>
 <summary>미팅 2회차</summary>
-모임 시간 :2019.09.19 10시 30분<br>
+모임 날짜 : 2019.09.19 10시 30분<br>
 장소 : 선릉역 4번출구 디캠프 4층 커뮤니티룸<br>
 작성자 : <a href='https://github.com/GiyunPark'>박기윤</a><br>
 <br>
@@ -113,7 +113,7 @@ JDK1.8.202(SE 8)(2019년 1월 15일) 버전 이하 사용시 무료
 	<li>팀 전원 intellij ultimate 버전 설치</li>
 	<li>docker 설치</li>
 	<ul>
-		<li>mysql latest 버전으로 docker에 설치</li>
+		<li>mysql latest 버전(ver 8.0.17)으로 docker에 설치</li>
 	</ul>
 </ul>
 <br>
@@ -145,7 +145,7 @@ JDK1.8.202(SE 8)(2019년 1월 15일) 버전 이하 사용시 무료
 
 <details>
 <summary>미팅 3회차</summary>
-모임 시간 :2019.09.26 10시 30분<br>
+모임 날짜 : 2019.09.26 10시 30분<br>
 장소 : 선릉역 4번출구 디캠프 4층 커뮤니티룸<br>
 작성자 : <a href='https://github.com/GiyunPark'>박기윤</a><br>
 <br>
@@ -162,4 +162,13 @@ JDK1.8.202(SE 8)(2019년 1월 15일) 버전 이하 사용시 무료
 	</ul>
 	<li>일정표 작성하기</li>
 <ul>
-<br>
+</details>
+
+<details>
+<summary>미팅 4회차</summary>
+모임 날짜 : 2019년 10월 3일
+</details>
+
+<details>
+</details>
+
