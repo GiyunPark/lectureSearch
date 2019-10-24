@@ -172,3 +172,13 @@ JDK1.8.202(SE 8)(2019년 1월 15일) 버전 이하 사용시 무료
 <details>
 </details>
 
+
+
+## 데모 실행환경
+
+- Docker에서 [Elastic Search](https://hub.docker.com/_/elasticsearch) 실행
+- 웹 서버 실행
+- http://localhost:8080/pageList
+- 로그인
+  - 아이디 : user
+  - 패스워드 : 웹 서버 실행시 임시 비밀번호 발급. IDE 콘솔에서 확인.
