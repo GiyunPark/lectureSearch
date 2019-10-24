@@ -72,6 +72,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public FilterRegistrationBean oauth2ClientFilterRegistration(
             OAuth2ClientContextFilter filter
     ) {
+
+        // OAuth2 클라이언트용 시큐리티 필터 OAuth2ClientContextFilter를 불러와서
+        // 스프링 시큐리티 필터가 실행되기 전 낮은 순서로 동작하도록 설정하는 메서드
+
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(filter);
         registration.setOrder(-100);
@@ -95,18 +99,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     ) {
         OAuth2ClientAuthenticationProcessingFilter filter =
                 new OAuth2ClientAuthenticationProcessingFilter(path);
-        OAuth2RestTemplate template = new OAuth2RestTemplate(client.getClient(),
-                oAuth2ClientContext);
+
+        OAuth2RestTemplate template = new OAuth2RestTemplate(
+                client.getClient(), // 인증이 수행될 경로를 넣어 OAuth2 클라이언트용 인증 처리 필터 생성
+                oAuth2ClientContext // 서버와의 통신을 위한 OAuth2RestTemplate 생성
+        );
+
         filter.setRestTemplate(template);
+
+        // User의 권한을 최적화해서 생성하기 위해
+        // UserInfoTokenService를 상속받는 UserTokenService를 생성.
+        // 생성한 UserTokenService를 필터의 서비스로 등록
         filter.setTokenServices(new UserTokenService(client, socialType));
+
+        // 인증이 성공되었을 경우(로그인 성공)
+        // 리다이렉트될 URL 설정
         filter.setAuthenticationSuccessHandler(
                 (request, response, authentication) -> response.sendRedirect(
                         "/"+socialType.getValue()+"/complete"
                 )
         );
+
+        // 인증 실패시(로그인 실패)
+        // 리다이렉트될 URL을 설정
         filter.setAuthenticationFailureHandler(
                 (request, response, exception) -> response.sendRedirect("/error")
         );
+
         return filter;
     }
 
