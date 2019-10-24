@@ -2,6 +2,7 @@ package com.lecturesearch.lecture;
 
 import com.lecturesearch.lecture.contents.ContentsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,10 @@ public class HomeController {
 //        return "/layout/main";
 //    }
 
-    @RequestMapping("/pageList")
+    @RequestMapping("/main")
     public String list(@PageableDefault Pageable pageable, Model model) {
-        model.addAttribute("pageList", contentsService.findContentsList(pageable));
+        Page i = contentsService.findContentsList(pageable);
+        model.addAttribute("pageList", i);
         return "/layout/main";
     }
 }

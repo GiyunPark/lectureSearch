@@ -15,5 +15,5 @@ public interface ContentsService {
     Page<ContentsVO> findContentsList(Pageable pageable);
 
     //콘텐츠 상세보기
-//    ContentsVO detailView(int no);
+    ContentsVO detailView(String no);
 }

@@ -30,10 +30,10 @@ public class ContentsServiceImpl implements ContentsService {
         return contentsRepository.findAll(pageable);
     }
 
-//    @Override
-//    public ContentsVO detailView(int no) {
-//        return contentsRepository.findById(no).orElse(new ContentsVO());
-//    }
+    @Override
+    public ContentsVO detailView(String no) {
+        return contentsRepository.findById(no).orElse(new ContentsVO());
+    }
 
     //아래는 Test용 메서드
 
