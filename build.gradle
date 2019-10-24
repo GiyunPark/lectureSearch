@@ -20,11 +20,7 @@ configurations {
 
 repositories {
     mavenCentral()
-    //If you are using a SNAPSHOT version
     maven { url 'https://repo.spring.io/snapshot' }
-    //If you are using a milestone or release candidate version
-    //현재는 SNAPSHOT 버전이기 때문에 필요 없습니다.
-    //maven { url 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
@@ -40,7 +36,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
-    compile('org.springframework.security.oauth:spring-security-oauth2')
     compile 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.1.BUILD-SNAPSHOT'
 
     // https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch

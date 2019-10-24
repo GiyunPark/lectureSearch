@@ -1,4 +1,4 @@
-# Fast search, Fast learn.
+# Search faster, learn faster.
 
 국내외 프로그래밍 영상을 모아서 보여주는 웹 애플리케이션입니다.
 
@@ -240,7 +240,7 @@ JDK1.8.202(SE 8)(2019년 1월 15일) 버전 이하 사용시 무료
 		<li>개인이 맡은 프로젝트 코드 개발 및 코드 리뷰 준비</li>
 	<ul>
 <br>
-	
+
 	<h2>활동 내용</h2>
 	<ul>
 		<li>docker elasticsearch, docker kibana 팀 전원 동일 환경 구성</li>
@@ -251,4 +251,6 @@ JDK1.8.202(SE 8)(2019년 1월 15일) 버전 이하 사용시 무료
 	
 	
 	
+
 >>>>>>> upstream/master
+
