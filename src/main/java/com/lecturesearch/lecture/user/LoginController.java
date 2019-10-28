@@ -18,7 +18,7 @@ public class LoginController {
         return "/user/login";
     }
 
-    @GetMapping(value= {"/facebook/complete", "/google/complete", "/kakao/complete"})
+    @GetMapping(value= "/loginSuccess")
     public String loginComplete(HttpSession session){
 
         // SecurityContextHolder에서 인증된 정보를 OAuth2Authentication 형태로 가져온다.
@@ -39,6 +39,6 @@ public class LoginController {
                 .build()
         );
 
-        return "redirect/board/list";
+        return "redirect/main";
     }
 }
