@@ -30,15 +30,15 @@
 
     <div class="container" style="text-align: center;">
         <h2 style="color: white">Log In</h2><br>
-        <a href="javascript:;" class="btn-social" data-social="facebook">
+        <a href="/login/facebook" target="_blank" class="btn-social" data-social="facebook">
             <img th:src="@{/images/facebook.png}" width="230px" height="40px" />
         </a>
         <br>
-        <a href="javascript:;" class="btn-social" data-social="google">
+        <a href="/login/google" target="_blank" class="btn-social" data-social="google">
             <img th:src="@{/images/google2.png}" width="230px" height="50px" />
         </a>
         <br>
-        <a href="javascript:;" class="btn-social" data-social="kakao">
+        <a href="/login/kakao" target="_blank" class="btn-social" data-social="kakao">
             <img th:src="@{/images/kakao.png}" width="230px" height="50px" />
         </a>
     </div>
@@ -47,13 +47,13 @@
 
     <footer th:replace="/layout/footer"></footer>
 
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script>
-        $('.btn_social').click(function () {
-            var socialType = $(this).data('social');
-            location.href="/login/"+socialType;
-        });
-    </script>
+    <script th:src="@{js/jquery-3.2.1.min.js}"></script>
+<!--    <script>-->
+<!--        $('.btn_social').click(function () {-->
+<!--            let socialType = $(this).data('social');-->
+<!--            location.href="/login/"+socialType;-->
+<!--        });-->
+<!--    </script>-->
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/popper.min.js"></script>

@@ -39,6 +39,6 @@ public class LoginController {
                 .build()
         );
 
-        return "redirect/main";
+        return "redirect:/main";
     }
 }
