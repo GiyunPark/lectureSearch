@@ -127,7 +127,7 @@ public class ContentsServiceImpl implements ContentsService {
                 e.printStackTrace();
             }
 //            File targetFile = new File("/Users/home/Java/git_clone/lectureSearch/src/main/resources/static/userImages/"+ imageName+".jpg");
-            File targetFile = new File("/Users/home/Java/git_clone/lectureSearch/src/main/resources/static/userImages/" + imageName + ".jpg");
+            File targetFile = new File("/home/ec2-user/app/image/" + imageName + ".jpg");
             try {
                 files[i].transferTo(targetFile);
             } catch (IOException e) {

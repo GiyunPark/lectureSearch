@@ -38,6 +38,6 @@ public class HomeController {
             model.addAttribute("user", user);
         }
         response.setContentType("multipart/form-data");
-        return "/layout/main";
+        return "layout/main";
     }
 }

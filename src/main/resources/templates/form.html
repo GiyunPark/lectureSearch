@@ -21,7 +21,6 @@
     <link rel="stylesheet" th:href="@{/fonts/flaticon/font/flaticon.css}">
     <link rel="stylesheet" th:href="@{/css/fl-bigmug-line.css}">
 
-
     <link rel="stylesheet" th:href="@{/css/aos.css}">
 
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -36,7 +35,6 @@
         width: 130px;
         color: white;
     }
-
     .toggle-button {
         margin-top: 10px;
     }
@@ -46,7 +44,6 @@
     .toggle-button a {
         font-size: 15px;
     }
-
     .user-title {
         padding-bottom: 15px;
         color: white;
@@ -57,30 +54,24 @@
     #showSignUp{
         color: #99ccff;
     }
-
     .form-group {
         display: flex;
         justify-content: center;
     }
-
     .form-group table tr {
         width: 110px;
     }
-
     .form-group table td {
         width: 250px;
     }
-
     /*  OAuth2 Login Button  */
     html, body {
         height: 100%;
     }
-
     #socialLogin {
         display: flex;
         justify-content: center;
     }
-
     .oauth2-btn-img {
         width: 330px;
         height: 45px;
@@ -90,26 +81,68 @@
         border: none;
         border-radius: 10px;
     }
-
     .oauth2-btn-img:hover {
         box-shadow: 0px 4px 8px;
         transform: translateY(-4px);
     }
-
     #btn-fb {
         background-color: #3b5998;
         color: #FFFFFF;
     }
-
     #btn-g {
         background-color: #ea4335;
         color: #fff;
     }
-
     #form-group-signUp {
         text-align: center;
         align-content: center;
         margin-bottom: 5px;
+    }
+    .container {
+        width:100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    #loginForm {
+        width:50%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;"
+    }
+    .form-group table {
+        text-align: center;
+        align-content: center;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    .form-group table tr td input:hover{
+        border: 3px solid #76FEC0;
+    }
+
+    .container {
+        width:100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    #loginForm {
+        width:50%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;"
+    }
+
+    .form-group table {
+        text-align: center;
+        align-content: center;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    .form-group table tr td input:hover{
+        border: 3px solid #76FEC0;
     }
 
 </style>
@@ -118,7 +151,7 @@
 
 <div class="site-loader"></div>
 
-<header th:replace="/layout/header"></header>
+<header th:replace="layout/header"></header>
 
 
 <div class="site-blocks-cover overlay" style="background-image: url(images/main01.jpg);" data-aos="fade"
@@ -127,47 +160,47 @@
         <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-10">
 
-                <div class="container" style="width:100%; margin-left: auto; margin-right: auto; text-align: center;">
+                <div class="container">
                     <!-- 로그인 뷰 -->
-                    <div id="loginForm" style="width:50%; margin-left: auto; margin-right: auto; text-align: center;">
+                    <div id="loginForm">
                         <h2 class="user-title">로그인</h2>
-                            <!-- 소셜 로그인-->
-                            <div id="socialLogin">
-                                <table style="margin-bottom: 30px;">
-                                    <tr> <!-- facebook -->
-                                        <td>
-                                            <div class="oauth2-social-btn">
-                                                <button class="oauth2-btn-img" id="btn-fb"
-                                                        style="margin-bottom: 8px;"
-                                                        href="javascript:;"
-                                                        data-social="facebook">
-                                                    Facebook으로 로그인
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr> <!-- google -->
-                                        <td>
-                                            <div class="oauth2-social-btn">
-                                                <button class="oauth2-btn-img" id="btn-g"
-                                                        href="javascript:;"
-                                                        data-social="google">
-                                                    Google로 로그인
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                        <!-- 소셜 로그인-->
+                        <div id="socialLogin">
+                            <table style="margin-bottom: 30px;">
+                                <tr> <!-- facebook -->
+                                    <td>
+                                        <div class="oauth2-social-btn">
+                                            <button class="oauth2-btn-img" id="btn-fb"
+                                                    style="margin-bottom: 8px;"
+                                                    href="javascript:;"
+                                                    data-social="facebook">
+                                                Facebook으로 로그인
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr> <!-- google -->
+                                    <td>
+                                        <div class="oauth2-social-btn">
+                                            <button class="oauth2-btn-img" id="btn-g"
+                                                    href="javascript:;"
+                                                    data-social="google">
+                                                Google로 로그인
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
 
-                        <form th:action="@{'/login'}" method="get">
+                        <form th:action="@{'/loginPass'}" method="post">
                             <!--일반 로그인-->
                             <div class="form-group">
-                                <table style="text-align: center; align-content: center; margin: auto; margin-bottom: 20px;">
+                                <table>
                                     <tr>
                                         <th><label for="loginEmail">이메일</label></th>
                                         <td><input type="text" class="form-control" id="loginEmail" name="email"
-                                                                         placeholder="아이디를 입력하세요."></td>
+                                                   placeholder="아이디를 입력하세요."></td>
                                     </tr>
                                     <tr>
                                         <th><label for="loginPassword">비밀번호</label></th>
@@ -195,12 +228,12 @@
                                 <tr>
                                     <th><label for="signUpEmail">이메일</label></th>
                                     <td><input type="email" class="form-control" id="signUpEmail" name="email"
-                                                                     placeholder="이메일주소를 입력하세요."></td>
+                                               placeholder="이메일주소를 입력하세요."></td>
                                 </tr>
                                 <tr>
                                     <th><label for="signUpName">사용자 이름</label></th>
                                     <td><input type="text" class="form-control" id="signUpName" name="name"
-                                                                     placeholder="닉네임을 입력하세요."></td>
+                                               placeholder="닉네임을 입력하세요."></td>
                                 </tr>
                                 <tr>
                                     <th><label for="signUpPassword">비밀번호</label></th>
@@ -209,12 +242,16 @@
                                 </tr>
                                 <tr>
                                     <th><label for="checkPW">비밀번호 확인</label></th>
-                                    <td><input type="password" class="form-control" id="checkPW" name="chk_password"
-                                               placeholder="위에서 입력한 비밀번호를 입력해주세요."></td>
+                                    <td>
+                                        <input type="password" class="form-control" id="checkPW" name="chk_password"
+                                               placeholder="재입력후, 오른쪽 버튼을 클릭해주세요.">
+                                    </td>
                                 </tr>
                             </table>
                         </div>
+
                         <button type="submit" class="btn btn-default" id="signUpBtn">가입하기</button>
+
                         <br>
                         <!--회원가입/로그인 토글-->
                         <p class="toggle-button"><span>계정이 있으신가요?&nbsp;</span><a
@@ -229,78 +266,127 @@
 </div>
 
 
-<footer th:replace="/layout/footer"></footer>
+<footer th:replace="layout/footer"></footer>
 
 
 </body>
 
 <script th:src="@{js/jquery.min.js}"></script>
-<script>
-
+<script type="text/javascript">
     $('#btn-fb').click(function() {
-        var socialType = $(this).data('social');
+        let socialType = $(this).data('social');
         location.href="/oauth2/authorization/"+socialType;
     });
-
     $('#btn-g').click(function() {
-        var socialType = $(this).data('social');
+        let socialType = $(this).data('social');
         location.href="/oauth2/authorization/"+socialType;
     });
-
     $("#showLogIn").click(function() {
         console.log('login btn clicked');
         $("#registerForm").hide();
         $("#loginForm").show();
-
     });
-
     $("#showSignUp").click(function() {
         console.log('regsiter btn clicked');
         $("#loginForm").hide();
         $("#registerForm").show();
-
     });
 
     // 회원가입 검증
-
     // 회원가입 버튼 비활성화
     $('#signUpBtn').attr("disabled", true);
+    let availableSignUp = false;
 
-    var availableSignUp = false;
+    // 이메일 중복 검사 및 형식 검사
+    $('#signUpEmail').blur(function () {
+        let email = $('#signUpEmail').val();
 
-    // 비밀번호 보안 검증
+        // 이메일 형식 검사
+        const emailFormats = ['.co', '.kr', 'com', 'org', 'net', 'ac'];
+        let bool = 0;
+        if(email.search('@')!=-1){
+            $('#signUpEmail').css("border", "1px solid white");
+            for(let i=0; i<emailFormats.length; i++){
+                let chkEmail = email.search(emailFormats[i]);
+                if(chkEmail==-1){
+                    bool++;
+                }
+            }
+            if(email.length>0 && bool == -emailFormats.length){
+                errorEmail();
+            }
 
-    $('#signUpPassword').focusout(function(){
-        var pwd1 = $("#signUpPassword").val();
-        if(pwd1.length<6 || pwd1.length>=16){
-            alert("비밀번호는 6자리 이상, 16자리 미만으로 사용 가능합니다.");
+        } else {
+            errorEmail();
         }
+
+        function errorEmail() {
+            $('#signUpEmail').focus();
+            $('#signUpEmail').css("border", "2px solid red");
+            alert("이메일형식이 올바르지 않습니다.");
+        }
+
+        // 이메일 중복 검사
+        $.ajax({
+            url : "http://localhost:8080/emailChk",
+            type : "post",
+            data:{
+                "email":$('#signUpEmail').val()
+            },
+            success: function(data){
+                if(data){
+                    $('#signUpEmail').css("border", "1px solid white");
+                    $('#signUpName').focus();
+                } else {
+                    alert("사용할 수 없거나 이미 사용중인 이메일입니다.");
+                    $('#signUpEmail').focus();
+                    $('#signUpEmail').css("border", "2px solid red");
+                }
+            }
+        });
     });
 
-    // 비밀번호 확인
-    $('#checkPW').focusout(function () {
 
-        var pwd1 = $("#signUpPassword").val();
-        var pwd2 = $("#checkPW").val();
+    // 비밀번호 보안 검증
+    $('#signUpPassword').blur(function(){
+        let pwd1 = $("#signUpPassword").val();
+        if(pwd1.length>0 && pwd1.length<6 || pwd1.length>=16){
+            alert("비밀번호는 6자리 이상, 16자리 미만으로 사용 가능합니다.");
+            $('#signUpPassword').focus();
+            $('#signUpPassword').css("border", "2px solid red");
+        } else {
+            $('#signUpPassword').css("border", "1px solid white");
+            $('#checkPW').focus();
+        }
+    });
+    // 비밀번호 확인
+    $('#checkPW').blur(function () {
+        let pwd1 = $("#signUpPassword").val();
+        let pwd2 = $("#checkPW").val();
+
         console.log(pwd1+" : "+pwd2);
         console.log(pwd1.length+" : "+pwd2.length);
         console.log("boolean : "+(pwd1.length==pwd2.length));
-
-        if (pwd1 != "" && pwd2 != "") {
-            if (pwd2 == pwd1) {
-                availableSignUp = true;
-                // 조건 충족시 회원가입 버튼 활성화
-                if(availableSignUp){
-                    $('#signUpBtn').removeAttr("disabled");
+        if(pwd2.length>0) {
+            if (pwd1 != "" && pwd2 != "") {
+                if (pwd2 === pwd1) {
+                    $('#checkPW').css("border", "1px solid white");
+                    availableSignUp = true;
+                    // 조건 충족시 회원가입 버튼 활성화
+                    if (availableSignUp) {
+                        $('#checkPW').css("border", "1px solid white");
+                        $('#signUpBtn').removeAttr("disabled");
+                    }
+                } else {
+                    alert("비밀번호가 일치하지 않습니다. 비밀번호를 확인하고 다시 입력해주세요.");
+                    $('#checkPW').focus();
+                    $('#checkPW').css("border", "2px solid red");
                 }
-            } else {
-                alert("비밀번호가 일치하지 않습니다. 비밀번호를 확인하고 다시 입력해주세요.");
             }
         }
     });
 </script>
 
-<!--<script src="webjars/jquery-ui/1.11.4/jquery-ui.min.css"></script>-->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/jquery-ui.js"></script>

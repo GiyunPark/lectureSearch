@@ -40,7 +40,7 @@ public class ContentsController {
         model.addAttribute("user", user);
 
         response.setContentType("multipart-form/data");
-        return "/contents/detailView";
+        return "contents/detailView";
     }
 
 //    @RequestMapping("/insert")
@@ -61,7 +61,7 @@ public class ContentsController {
     @RequestMapping("/boardform")
     public String boardForm(@SocialUser User user, Model model) {
         model.addAttribute("user", user);
-        return "/layout/boardForm";
+        return "layout/boardForm";
     }
 
     @RequestMapping("/updateContent")
@@ -69,7 +69,7 @@ public class ContentsController {
         ContentsVO i = contentsService.detailView(idx);
         model.addAttribute("user", user);
         model.addAttribute("content",i);
-        return "/layout/boardForm";
+        return "layout/boardForm";
     }
     @RequestMapping("deleteContent")
     public String deleteContent(String idx){
@@ -172,7 +172,7 @@ public class ContentsController {
             cartList.add(contentsService.detailView(k));
         }
             model.addAttribute("list", cartList);
-        return "/contents/cartList";
+        return "contents/cartList";
     }
 
     @RequestMapping("/cartInsert")
