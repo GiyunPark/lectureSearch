@@ -12,5 +12,8 @@ public interface CartRepository extends ElasticsearchRepository<CartVO, String> 
     CartVO save(CartVO paramVO);
 
     //장바구니 삭제
-    void deleteById(String contentsIdx);
+    void deleteById(String cartIdx);
+
+    //장바구니 모든회원 리스트
+    Iterable<CartVO> findAll();
 }

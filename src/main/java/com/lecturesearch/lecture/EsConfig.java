@@ -23,23 +23,22 @@ import java.net.UnknownHostException;
 public class EsConfig {
 
 //로컬 ElasticSearch server 이용시
+//@Bean
+//Client client() throws UnknownHostException {
+//    Settings settings = Settings.builder()
+//            .put("cluster.name", "docker-cluster")
+//            .build();
+//    TransportClient client = new PreBuiltTransportClient(settings);
+//    client.addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1")
+//            , 9300));
+//    return client;
+//}
 
-    @Bean
-    Client client() throws UnknownHostException {
-        Settings settings = Settings.builder()
-                .put("cluster.name", "docker-cluster")
-                .build();
-        TransportClient client = new PreBuiltTransportClient(settings);
-        client.addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1")
-                , 9300));
-        return client;
-    }
-
-//    AWS ElasticSearch sever 이용시
-//    @Bean
-//    public RestHighLevelClient client() {
-//        return new RestHighLevelClient(RestClient.builder(HttpHost.create("https://search-lecture-bhdskc4zi274juz5ltfaxsjexy.ap-northeast-2.es.amazonaws.com")));
-//    }
+// AWS ElasticSearch sever 이용시
+@Bean
+public RestHighLevelClient client() {
+    return new RestHighLevelClient(RestClient.builder(HttpHost.create("https://search-lecturesearch-p667dliqv3mxvgjrfc3ck2ytcu.us-east-1.es.amazonaws.com")));
+}
 
 
 //    public ElasticsearchOperations elasticsearchTemplate() throws Exception {

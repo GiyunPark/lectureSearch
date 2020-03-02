@@ -82,8 +82,8 @@ public class ContentsServiceImpl implements ContentsService {
     }
 
     @Override
-    public void cartDelete(String contentsIdx) {
-        cartRepository.deleteById(contentsIdx);
+    public void cartDelete(String cartIdx) {
+        cartRepository.deleteById(cartIdx);
     }
 
     @Override
@@ -155,6 +155,11 @@ public class ContentsServiceImpl implements ContentsService {
 
         contents.updateAverageStar(contentsDTO);
         return contentsRepository.save(contents);
+    }
+
+    @Override
+    public Iterable<CartVO> cartList() {
+        return cartRepository.findAll();
     }
 
     @Override

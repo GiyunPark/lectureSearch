@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -29,13 +30,6 @@ public class ContentsController {
 
     @Autowired
     private UserRepository userRepository;
-
-//    @RequestMapping("/list")
-//    public String list(Model model, @ModelAttribute ContentsVO paramVO){
-//        Iterable<ContentsVO> rsList = contentsService.contentsList(paramVO);
-//        model.addAttribute("list", rsList);
-//        return "layout/main";
-//    }
 
     @RequestMapping("/detail")
 
@@ -58,21 +52,6 @@ public class ContentsController {
         response.setContentType("multipart-form/data");
         return "contents/detailView";
     }
-
-//    @RequestMapping("/insert")
-//    public String write() {
-//        //임시 데이터저장용
-//        for(int i = 0; i < 30; i++){
-//            ContentsVO paramVO = new ContentsVO("양념가득 치킨"+i, "인프런","파이썬","img_4.jpg",55000,"파이썬은 문법 구조가 쉽기 때문에 프로그래밍을 처음 접하는 초보자도 쉽게 이해할 수 있어요. 파이썬은 그 어떤 프로그래밍 언어보다 확장성이 월등히 높은 언어에요. 데이터분석가도, 웹개발자도, 머신러닝 연구자도, 대학원생도 파이썬을 사용하죠. 당신이 어떤 업무를 맡더라도 파이썬만 알아두면 척척 대응하기 쉬워집니다.\n" +
-//                    "\n" +
-//                    "당연히 비전공자도 다룰 수 있습니다. 프로그래밍 언어는 만국공통어에요. 만약 C, Java 등의 언어를 접해봤다면 더욱 쉽게 파이썬을 익힐 수 있겠죠.\n" +
-//                    "\n" +
-//                    "파이썬의 기본부터 심화까지 차근차근 따라해보세요. 인프런이 제시하는 프로그래밍 학습 로드맵을 따라가면 어느덧 파이썬 프로그래밍을 마스터한 자신과 만나게 될 겁니다. ","2019년 7월 16일","12시간 39분", LocalDateTime.now().toString());
-//            contentsService.insert(paramVO);
-//        }
-//     return "redirect:/main";
-//    }
-
 
     @RequestMapping("/boardform")
     public String boardForm(@SocialUser User socialUser, Principal principal, Model model) {
@@ -101,8 +80,19 @@ public class ContentsController {
     }
     @RequestMapping("deleteContent")
     public String deleteContent(String idx){
-        contentsService.deleteContent(idx);
-        return "redirect:/main";
+         contentsService.deleteContent(idx);
+         //강의삭제시 장바구니도 삭제
+        Iterable<CartVO> cartAllList = contentsService.cartList();
+        ArrayList<String> arrayList = new ArrayList<>();
+        for(CartVO allList : cartAllList){
+            if(allList.getContentsIdx().contains(idx)){
+                arrayList.add(allList.getCartIdx());
+                for(int i = 0; i < arrayList.size(); i++){
+                    contentsService.cartDelete(arrayList.get(i));
+                }
+            }
+        }
+         return "redirect:/main";
     }
 
     //후기작성
@@ -196,23 +186,29 @@ public class ContentsController {
             user = socialUser;
         }
         String email = user.getEmail();
-        Iterable<CartVO> i = contentsService.cartList(email);
+        Iterable<CartVO> cartList = contentsService.cartList(email);
 
-        ArrayList<String> arrList = new ArrayList<String>();
-        for(CartVO cart : i){
-            arrList.add(cart.getContentsIdx());
+        ArrayList<String> arrListContentsIdx = new ArrayList<String>();
+        ArrayList<String> arrListCartIdx = new ArrayList<String>();
+        for(CartVO cart : cartList){
+            arrListContentsIdx.add(cart.getContentsIdx());
+            arrListCartIdx.add(cart.getCartIdx());
         }
-        List<ContentsVO> cartList = new ArrayList<>();
-        for (String k : arrList) {
-            cartList.add(contentsService.detailView(k));
+        List<ContentsVO> cartContentsList = new ArrayList<>();
+        for (String k : arrListContentsIdx) {
+            cartContentsList.add(contentsService.detailView(k));
         }
-        model.addAttribute("list", cartList);
+        model.addAttribute("user", user);
+        model.addAttribute("cartContentsList", cartContentsList);
+        model.addAttribute("cartIdxList", arrListCartIdx);
         return "contents/cartList";
     }
 
     @RequestMapping(value = "/loadImage", method = RequestMethod.GET)
     public void loadImage(String image, HttpServletResponse response) throws IOException {
-        File file = new File("/home/ec2-user/app/step1/lectureSearch/src/main/resources/static/userImages/",image+".jpg");
+//        File file = new File("/home/ec2-user/app/step1/lectureSearch/src/main/resources/static/userImages/",image+".jpg");
+        //로컬 테스트
+        File file = new File("/Users/home/Java/git_clone/lectureSearch/src/main/resources/static/userImages/",image+".jpg");
         FileInputStream fileInputStream = new FileInputStream(file);
         response.setContentLength((int)file.length());
         response.setCharacterEncoding("utf-8");
@@ -237,31 +233,40 @@ public class ContentsController {
             email = user.getEmail();
         }
 
+        //email값에 해당하는 카트리스트를 뽑아온다
         Iterable<CartVO> i = contentsService.cartList(email);
-        ArrayList<String> arrList = new ArrayList<String>();
-        for(CartVO cart : i){
-            arrList.add(cart.getContentsIdx());
+        ArrayList<String> arrListContentsIdx = new ArrayList<String>();
+        String cartIdx = "";
+        //카트리스트에 들어있는 컨텐츠의 index값을 arrayList에 저장한다
+        for(CartVO cart : i) {
+            arrListContentsIdx.add(cart.getContentsIdx());
         }
-
         boolean verify = true;
-        String contentsIndex = paramVO.getContentsIdx();
-        for (String s : arrList) {
+        String contentsIndex = contentsIdx;
+        //카트리스트에 이미 저장되있는지 검사
+        for (String s : arrListContentsIdx) {
             if (s.equals(contentsIndex)) {
                 verify = false;
+                int cartIndexOf = s.indexOf(contentsIndex);
+                ArrayList<String> arrListCartIdx = new ArrayList<String>();
+                for (CartVO cart : i) {
+                    arrListCartIdx.add(cart.getCartIdx());
+                }
+                cartIdx = arrListCartIdx.get(cartIndexOf);
             }
         }
 
         if(verify){
             contentsService.cartInsert(paramVO);
         } else {
-            contentsService.cartDelete(contentsIdx);
+            contentsService.cartDelete(cartIdx);
         }
         return "redirect:/contents/cartList";
     }
 
     @RequestMapping("/cartDelete")
-    public String cartDelete(String contentsIdx){
-        contentsService.cartDelete(contentsIdx);
+    public String cartDelete(String cartIdx){
+            contentsService.cartDelete(cartIdx);
         return "redirect:/contents/cartList";
     }
 }

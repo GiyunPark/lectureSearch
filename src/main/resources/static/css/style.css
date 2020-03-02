@@ -1386,7 +1386,7 @@ a:hover {
   cursor: zoom-in;
   opacity: .5; }
 
-/*main page 콘텐츠 오버레이*/
+/*main, cartList page 컨텐츠 오버레이*/
 .container-custom {
   position: relative;
   width: 100%;

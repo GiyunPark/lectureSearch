@@ -9,6 +9,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 public class CartVO {
 
     @Id
+    private String cartIdx;
     private String contentsIdx;
     private String email;
 

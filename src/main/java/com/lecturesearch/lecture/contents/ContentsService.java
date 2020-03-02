@@ -47,7 +47,7 @@ public interface ContentsService {
     CartVO cartInsert(CartVO paramVO);
 
     //장바구니 삭제
-    void cartDelete(String contentsIdx);
+    void cartDelete(String cartIdx);
 
     List<ContentsVO> findAll();
 
@@ -59,6 +59,8 @@ public interface ContentsService {
     ReviewVO reviewVO(String idx);
 
     ContentsVO averageStarDelete(int star, String contentsIdx);
+
+    Iterable<CartVO> cartList();
 
 //    ContentsVO averageStar(String contentsIdx, Pageable pageable);
 }

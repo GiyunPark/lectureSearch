@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>LectureSearch &mdash; Website</title>
+        <title>LectureSearch &mdash; Main</title>
         <meta charset="UTF-8">
         <meta name="author" content="LectureSearch Maker">
         <meta name="description" content="흩어져 있는 강의를 한번에 모아서 찾을 수 있는 LectureSearch입니다.">
@@ -37,7 +37,6 @@
         </style>
     </head>
     <body>
-        <div class="site-loader"></div>
 
         <header th:replace="layout/header"></header>
 
@@ -127,7 +126,7 @@
             </div>
         </div>
 
-        <!-- pageList 일경우 -->
+        <!-- pageList 일경우 start -->
         <div th:if="${pageList}!= null">
             <div class="site-section site-section-sm bg-light">
                 <div class="container">
@@ -140,48 +139,79 @@
                         <!--         등록된 강좌가 있는 경우 start-->
                         <div th:if="${pageList.getTotalElements()} > 0" th:each="contents : ${pageList}" class="col-md-13 col-lg-13 mb-4">
                             <div class="property-entry h-100">
-                                <a style="height: 180px;" th:href="@{/contents/detail(idx=${contents.idx})}" class="property-thumbnail">
+                                <a th:href="@{/contents/detail(idx=${contents.idx})}" class="property-thumbnail" style="height:180px;">
                                     <img th:src="@{contents/loadImage(image=${contents.images[0]})}" onerror="this.src='/images/main01.jpg'" alt="Image" class="img-fluid">
                                 </a>
-                                <div class="p-4 property-body">
-                                    <!-- 장바구니 -->
+                                <div class="p-4-custom property-body">
+                                    <!--                장바구니 start -->
                                     <form action="/contents/cartInsert" id="cart" method="post" th:if="${user} != null">
                                         <input type="hidden" name="email" th:value="${user.email}"></input>
                                         <input type="hidden" name="contentsIdx" th:value="${contents.idx}"/>
-                                        <!--                    <a href="javascript:document.getElementById('cart').submit();" class="property-favorite"><span class="icon-heart-o"></span></a>-->
-                                        <!--                  <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>-->
-                                        <button type="submit" class="property-favorite"><span class="icon-heart-o"></span></button>
+                                        <!--                    장바구니에 담긴 상품은 class active로 변경-->
+                                        <div th:if="${!arrList.isEmpty()}">
+                                            <div th:if="${arrList.contains(contents.idx)}">
+                                                <button type="submit" class="property-favorite active"><span class="icon-heart-o"></span></button>
+                                            </div>
+                                            <div th:unless="${arrList.contains(contents.idx)}">
+                                                <button type="submit" class="property-favorite"><span class="icon-heart-o"></span></button>
+                                            </div>
+                                        </div>
+                                        <button th:if="${arrList.isEmpty()}" type="submit" class="property-favorite"><span class="icon-heart-o"></span></button>
                                     </form>
-                                    <!-- 장바구니 -->
-                                    <h2 class="property-title"><a th:text="${contents.title}" th:href="@{/contents/detail(idx=${contents.idx})}"></a></h2>
+                                    <!--                장바구니 end -->
+                                    <div class="container-custom">
+                                        <div class="contents-custom">
+                                            <h2 class="property-title"><a th:text="${contents.title}" th:href="@{/contents/detail(idx=${contents.idx})}"></a></h2>
 
-                                    <!--                <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 625 S. Berendo St Unit 607 Los Angeles, CA 90005</span>-->
-                                    <strong class="property-price text-primary mb-3 d-block text-success" style="text-align: end" th:text="|￦${contents.price}|"></strong>
-                                    <ul class="property-specs-wrap mb-3 mb-lg-0">
-                                        <li>
-                                            <span class="property-specs">평점</span>
-                                            <span class="property-specs-number">A<sup>+</sup></span>
-
-                                        </li>
-                                        <li>
-                                            <span class="property-specs">강사</span>
-                                            <span class="property-specs-number" th:text="${contents.author}"></span>
-
-                                        </li>
-
-                                        <li>
-                                            <span class="property-specs">제작 날짜</span>
-                                            <span class="property-specs-number" th:text="${contents.createdDate}"></span>
-
-                                        </li>
-                                    </ul>
+                                            <!--                <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 625 S. Berendo St Unit 607 Los Angeles, CA 90005</span>-->
+                                            <span class="property-price text-primary mb-3 d-block text-success" style="text-align: end" th:text="|￦${contents.price}|"></span>
+                                            <ul class="property-specs-wrap mb-3 mb-lg-0">
+                                                <li>
+                                                    <span class="property-specs">평점</span>
+                                                    <div th:if="${contents.averageStar} == 0">
+                                                        <span class="property-specs-number-custom">없음</span>
+                                                    </div>
+                                                    <div th:if="${contents.averageStar} == 1">
+                                                        <img src="/images/star.png" th:each="num: ${#numbers.sequence(1,1)}">
+                                                    </div>
+                                                    <div th:if="${contents.averageStar} == 2">
+                                                        <img src="/images/star.png" th:each="num: ${#numbers.sequence(1,2)}">
+                                                    </div>
+                                                    <div th:if="${contents.averageStar} == 3">
+                                                        <img src="/images/star.png" th:each="num: ${#numbers.sequence(1,3)}">
+                                                    </div>
+                                                    <div th:if="${contents.averageStar} == 4">
+                                                        <img src="/images/star.png" th:each="num: ${#numbers.sequence(1,4)}">
+                                                    </div>
+                                                    <div th:if="${contents.averageStar} == 5">
+                                                        <img src="/images/star.png" th:each="num: ${#numbers.sequence(1,5)}">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <span class="property-specs">강사</span>
+                                                    <span class="property-specs-number-custom" th:text="${contents.author}"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="property-specs">제작 날짜</span>
+                                                    <span class="property-specs-number-custom" th:text="${contents.createdDate}"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="middle-custom">
+                                            <div class="contentsTitle">
+                                                <a th:href="@{/contents/detail(idx=${contents.idx})}"><p th:text="${contents.title}"></p></a>
+                                            </div>
+                                            <div class="text-custom" th:text="${contents.description}">콘텐츠 내용</div>
+                                            <div><img src="images/subject.png" align="left"/><p class="text-custom2">JAVA, 웹 개발</p></div>
+                                            <div><img src="images/runningTime.png" align="left"/><p class="text-custom2" th:text="${contents.runningTime}">강의시간</p></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!--         등록된 강좌가 있는 경우 end-->
                     </div>
                 </div>
-
                 <div class="row" th:if="${pageList.getTotalElements()} > 0">
                     <div class="col-md-12 text-center">
                         <!-- Pagination -->
@@ -208,55 +238,95 @@
 
             </div>
         </div>
-        <!-- pageList 일경우 -->
+        <!-- pageList 일경우 end-->
 
         <!-- resultList 일경우 -->
         <div th:if="${resultList}!= null">
             <div class="site-section site-section-sm bg-light">
                 <div class="container">
-                    <!--        강좌가 없을 경우 start-->
+                    <!--        검색된 강좌가 없을 경우 start-->
                     <div style="text-align: center">
-                        <h2 th:if="${resultList.getTotalElements()} == 0">현재 등록된 강좌가 없습니다.</h2>
+                        <h2 th:if="${resultList.getTotalElements()} == 0">검색어와 일치하는 강좌가 없습니다.</h2>
                     </div>
-                    <!--        강좌가 없을 경우 end-->
+                    <!--        검색된 강좌가 없을 경우 end-->
                     <div class="row mb-5">
-                        <!--         등록된 강좌가 있는 경우 start-->
+                        <!--         검색된 강좌가 있는 경우 start-->
                         <div th:if="${resultList.getTotalElements()} > 0" th:each="contents : ${resultList}" class="col-md-13 col-lg-13 mb-4">
                             <div class="property-entry h-100">
-                                <a th:href="@{/contents/detail(idx=${contents.idx})}" class="property-thumbnail">
-                                    <div class="offer-type-wrap">
-                                        <span class="offer-type bg-danger">Sale</span>
-                                        <span class="offer-type bg-success">Rent</span>
-                                    </div>
+                                <a th:href="@{/contents/detail(idx=${contents.idx})}" class="property-thumbnail" style="height: 180px;">
                                     <!--                <img src="images/img_1.jpg" alt="Image" class="img-fluid">-->
-                                    <img th:src="@{'/images/'+${contents.images}}" alt="Image" class="img-fluid">
+                                    <!--                <img th:src="@{'/userImages/'+${contents.images[0]}}+'.jpg'" alt="Image" class="img-fluid">-->
+                                    <img th:src="@{contents/loadImage(image=${contents.images[0]})}" onerror="this.src='/images/main01.jpg'" alt="Image" class="img-fluid">
                                 </a>
-                                <div class="p-4 property-body">
-                                    <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                                    <h2 class="property-title"><a th:text="${contents.title}" th:href="@{/contents/detail(idx=${contents.idx})}"></a></h2>
-                                    <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 625 S. Berendo St Unit 607 Los Angeles, CA 90005</span>
-                                    <strong class="property-price text-primary mb-3 d-block text-success" th:text="|￦${contents.price}|">$2,265,500</strong>
-                                    <ul class="property-specs-wrap mb-3 mb-lg-0">
-                                        <li>
-                                            <span class="property-specs">Beds</span>
-                                            <span class="property-specs-number">2 <sup>+</sup></span>
+                                <div class="p-4-custom property-body">
 
-                                        </li>
-                                        <li>
-                                            <span class="property-specs">Baths</span>
-                                            <span class="property-specs-number">2</span>
+                                    <!--                장바구니 start -->
+                                    <form action="/contents/cartInsert" method="post" th:if="${user} != null">
+                                        <input type="hidden" name="email" th:value="${user.email}"></input>
+                                        <input type="hidden" name="contentsIdx" th:value="${contents.idx}"/>
+                                        <!--                    장바구니에 담긴 상품은 class active로 변경-->
+                                        <div th:if="${!arrList.isEmpty()}">
+                                            <div th:if="${arrList.contains(contents.idx)}">
+                                                <button type="submit" class="property-favorite active"><span class="icon-heart-o"></span></button>
+                                            </div>
+                                            <div th:unless="${arrList.contains(contents.idx)}">
+                                                <button type="submit" class="property-favorite"><span class="icon-heart-o"></span></button>
+                                            </div>
+                                        </div>
+                                        <button th:if="${arrList.isEmpty()}" type="submit" class="property-favorite"><span class="icon-heart-o"></span></button>
+                                    </form>
+                                    <!--                장바구니 end -->
+                                    <div class="container-custom">
+                                        <div class="contents-custom">
+                                            <h2 class="property-title"><a th:text="${contents.title}" th:href="@{/contents/detail(idx=${contents.idx})}"></a></h2>
 
-                                        </li>
-                                        <li>
-                                            <span class="property-specs">SQ FT</span>
-                                            <span class="property-specs-number">7,000</span>
-
-                                        </li>
-                                    </ul>
+                                            <!--                <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 625 S. Berendo St Unit 607 Los Angeles, CA 90005</span>-->
+                                            <span class="property-price text-primary mb-3 d-block text-success" style="text-align: end" th:text="|￦${contents.price}|"></span>
+                                            <ul class="property-specs-wrap mb-3 mb-lg-0">
+                                                <li>
+                                                    <span class="property-specs">평점</span>
+                                                    <div th:if="${contents.averageStar} == 0">
+                                                        <span class="property-specs-number-custom">없음</span>
+                                                    </div>
+                                                    <div th:if="${contents.averageStar} == 1">
+                                                        <img src="/images/star.png" th:each="num: ${#numbers.sequence(1,1)}">
+                                                    </div>
+                                                    <div th:if="${contents.averageStar} == 2">
+                                                        <img src="/images/star.png" th:each="num: ${#numbers.sequence(1,2)}">
+                                                    </div>
+                                                    <div th:if="${contents.averageStar} == 3">
+                                                        <img src="/images/star.png" th:each="num: ${#numbers.sequence(1,3)}">
+                                                    </div>
+                                                    <div th:if="${contents.averageStar} == 4">
+                                                        <img src="/images/star.png" th:each="num: ${#numbers.sequence(1,4)}">
+                                                    </div>
+                                                    <div th:if="${contents.averageStar} == 5">
+                                                        <img src="/images/star.png" th:each="num: ${#numbers.sequence(1,5)}">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <span class="property-specs">강사</span>
+                                                    <span class="property-specs-number-custom" th:text="${contents.author}"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="property-specs">제작 날짜</span>
+                                                    <span class="property-specs-number-custom" th:text="${contents.createdDate}"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="middle-custom">
+                                            <div class="contentsTitle">
+                                                <a th:href="@{/contents/detail(idx=${contents.idx})}"><p th:text="${contents.title}"></p></a>
+                                            </div>
+                                            <div class="text-custom" th:text="${contents.description}">콘텐츠 내용</div>
+                                            <div><img src="images/subject.png" align="left"/><p class="text-custom2">JAVA, 웹 개발</p></div>
+                                            <div><img src="images/runningTime.png" align="left"/><p class="text-custom2" th:text="${contents.runningTime}">강의시간</p></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!--         등록된 강좌가 있는 경우 end-->
+                        <!--         검색된 강좌가 있는 경우 end-->
                     </div>
                 </div>
                 <div class="row" th:if="${resultList.getTotalElements()} > 0">
@@ -286,8 +356,6 @@
             </div>
         </div>
         <!-- resultList 일경우 -->
-
-
 
 
 
@@ -371,6 +439,7 @@
 
 
         <div class="container">
+            <a name="whoweare"></a>
             <div class="row mb-5 justify-content-center">
                 <div class="col-md-7 text-center" style="padding-top: 40px;">
                     <div class="site-section-title">

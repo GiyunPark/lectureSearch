@@ -26,9 +26,10 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
-        return "layout/loginForm";
+        return "user/loginForm";
     }
 
+    // 회원가입시 유저 이메일 중복체크
     @ResponseBody
     @RequestMapping(value = "/emailChk", method = RequestMethod.POST)
     public int emailCheck(@RequestBody String email) {

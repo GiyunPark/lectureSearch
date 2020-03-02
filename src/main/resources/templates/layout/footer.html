@@ -1,86 +1,63 @@
 <style>
-    .footer-contents {
-        flex: 0 0 100%;
-        max-width: 100%;
-        display: inline-block;
+    .pt-5 {
+        padding-top: 0em !important;
     }
-
-    .word4wrap {
-        word-wrap: break-word;
-        display: inline-block;
-        word-break: keep-all;
-    }
-
-    #copyrights {
-        padding-top: 0px !important;
-    }
-
-    .site-footer {
-        padding: 30px !important;
-    }
-
     .mt-5 {
-         padding-top: 0rem !important;
-     }
-
-    .mb-5, .my-5 {
-        margin-bottom: 0rem !important;
+        margin-top: 0em !important;
     }
-
-    .footer-heading {
-        font-size: 25px !important;
+    .icon-github{
+        width: 30px;
     }
-
-    p {
-        font-size: 18px;
-        margin-bottom: 2em;
-    }
-
-    .mb-4 {
-        padding-top: 50px;
-    }
-
 </style>
-
 <footer class="site-footer">
-
     <div class="container">
         <div class="row">
-            <div class="footer-contents">
+            <div class="col-lg-4">
                 <div class="mb-5">
                     <h3 class="footer-heading mb-4">About LectureSearch</h3>
-                    <p class="word4wrap">LectureSearch는 세계 곳곳에 업로드된 IT관련 강의와 강의플랫폼을 손쉽게 검색하여 접할 수 있게 하고자 하는 의도로 
-                        제작되었습니다. <br>LectureSearch에서 필요한 강의를 쉽게 검색하고, 실력을 키우세요!
-                    </p>
+                    <p>LectureSearch는 세계 곳곳에 업로드된 IT관련 강의와 강의플랫폼을 손쉽게 검색하여 접할 수 있게 하고자 하는 의도록 제작되었습니다. 특정 플랫폼을 벗어나
+                        전세계 곳곳 숨어있는 명강의들을 한번의 검색으로 찾아 강의를 들어보세요!</p>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="footer-contents">
-                <div class="mb-5">
-                    <h3 class="footer-heading mb-4">With Us</h3>
-                    <div>
-                        <a href="https://github.com/GiyunPark/lectureSearch" class="pl-0 pr-3">
-                            <img width="" src="/images/icon-github.png">
-                        </a>
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <h3 class="footer-heading mb-4">Navigations</h3>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <ul class="list-unstyled">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/main#whoweare">About</a></li>
+                            <li><a href="https://github.com/GiyunPark/lectureSearch" target="_blank">Github</a></li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="row pt-5 mt-5 text-center" id="copyrights">
+
+            </div>
+
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h3 class="footer-heading mb-4">Contribute Us</h3>
+                <div>
+                    <a href="https://github.com/GiyunPark/lectureSearch/pulls" target="_blank" class="pl-0 pr-3">
+                        <img class="icon-github" src="/images/icon-github.png">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="row pt-5 mt-5 text-center">
             <div class="col-md-12">
                 <p>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;2019 All rights reserved | This template is made with
-                    <i class="icon-heart
-text-danger" aria-hidden="true"></i>
-                    by
-                    <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    Copyright &copy;<script data-cfasync="false"></script>
+                    <script>document.write(new Date().getFullYear());</script>
+                    All rights reserved | This template is made with by Colorlib.<br>
+                    Thank you, <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <i class="icon-heart text-danger" aria-hidden="true"></i>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </p>
             </div>
         </div>
-
     </div>
 </footer>

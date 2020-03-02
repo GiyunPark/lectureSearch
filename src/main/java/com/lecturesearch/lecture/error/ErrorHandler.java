@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ErrorHandler {
-    @GetMapping("/error")
-    public String errorpage(){
-        throw new IllegalStateException("Error");
-    }
+//    @GetMapping("/error")
+//    public String errorpage(){
+//        throw new IllegalStateException("Error");
+//    }
 }

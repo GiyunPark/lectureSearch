@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import java.util.List;
 
 @SpringBootApplication
+//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class LectureApplication extends WebMvcConfigurerAdapter {
 
     @Autowired
